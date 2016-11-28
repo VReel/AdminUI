@@ -1,0 +1,29 @@
+== README
+
+A base Rails 4.7.1 application with devise/login with google, and other useful stuff including
+
+* devise
+
+* omniauth-google-oauth2
+
+* rspec
+
+* fabrication
+
+* delayed_job
+
+* bootstrap
+
+* fontawesome
+
+* .env
+
+== GOOGLE LOGIN
+
+in your .env file in the root set
+
+    export GOOGLE_CLIENT_ID=from_your_google_apis_dashboard
+    export GOOGLE_CLIENT_SECRET=from_your_google_apis_dashboard
+
+
+The Google API dashboard is at https://console.developers.google.com/apis/credentials

@@ -1,0 +1,47 @@
+<%= render partial: "layouts/html_header" %>
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><span class="logo">Lets Encrypt Template</span></span></a>
+    </div>
+
+    <ul class="nav navbar-nav">
+
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to('Sign out', destroy_user_session_path) %></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <div class="container">
+        <div class="alert-inner">
+          <span class="glyphicon glyphicon-ok"></span>
+          <%= flash[:notice] %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <div class="alert alert-danger">
+      <div class="container">
+        <div class="alert-inner">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>
+          <%= flash[:alert] %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= yield %>
+</div>
+
+<%= render partial: "layouts/html_footer" %>
+
+
