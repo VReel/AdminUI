@@ -1,6 +1,8 @@
 == README
 
-A base Rails 4.7.1 application with devise/login with and lets encrypt for use on heroku, and other useful stuff including
+A base Rails 4.7.1 application with devise/for login with  lets encrypt for SSL, for use on heroku.
+
+We also have other useful stuff including
 
 * devise
 
@@ -17,6 +19,8 @@ A base Rails 4.7.1 application with devise/login with and lets encrypt for use o
 * capybara
 
 * brakeman
+
+* rubocop
 
 * .env
 
