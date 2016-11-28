@@ -1,10 +1,8 @@
 == README
 
-A base Rails 4.7.1 application with devise/login with google, and other useful stuff including
+A base Rails 4.7.1 application with devise/login with and lets encrypt for use on heroku, and other useful stuff including
 
 * devise
-
-* omniauth-google-oauth2
 
 * rspec
 
@@ -16,14 +14,20 @@ A base Rails 4.7.1 application with devise/login with google, and other useful s
 
 * fontawesome
 
+* capybara
+
+* brakeman
+
 * .env
 
-== GOOGLE LOGIN
+See this
 
-in your .env file in the root set
+https://github.com/cbetta/letsencrypt-rails-heroku
 
-    export GOOGLE_CLIENT_ID=from_your_google_apis_dashboard
-    export GOOGLE_CLIENT_SECRET=from_your_google_apis_dashboard
+and
 
+https://betta.io/blog/2016/10/28/using-letsencrypt-with-sinatra-on-heroku/
 
-The Google API dashboard is at https://console.developers.google.com/apis/credentials
+this 
+
+for details of using lets encrypt.
