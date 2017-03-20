@@ -24,9 +24,6 @@ gem 'puma'
 # gem 'capistrano-rails', group: :development
 gem 'dotenv-rails'
 
-# User authentication.
-gem 'devise'
-
 gem 'platform-api', github: 'jalada/platform-api', branch: 'master'
 
 group :development, :test do

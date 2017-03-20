@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def current_user
+    nil
+  end
+
   def layout_by_resource
     if current_user.present?
       'application'
