@@ -39,4 +39,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.api_servers = {
+    'http://0.0.0.0:3000' => ENV['DEV_APPLICATION_ID'],
+    'https://api.vreel.io' => ENV['PRODUCTION_APPLICATION_ID'],
+    'https://vreel-staging.herokuapp.com'  => ENV['STAGING_APPLICATION_ID']
+  }
 end

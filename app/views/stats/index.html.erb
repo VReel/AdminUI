@@ -1,0 +1,114 @@
+
+
+<div class="container">
+  <div class="pull-right" id="filter-button">
+    <a class="btn btn-primary">Filter by date</a>
+  </div>
+  <h3>Stats from <%= session['api_server'] %></h3>
+</div>
+
+<%= form_tag '/stats', method: :get, id: "date-filter-form", style: 'display: none' %>
+  <div class="container">
+      <div class="well">
+        <div class="pull-right" id="filter-button">
+          <a href='/stats'><i class="fa fa-times"></i></a>
+        </div>
+        <h3>Choose Date Range</h3>
+        <div>
+          <label>Date from:
+            <input type="text" data-provide='datepicker' name="date_from" value="<%= params[:date_from] %>" data-date-format='dd-M-yyyy'>
+          </label>
+          <label>Date to:
+            <input type="text" data-provide='datepicker' name="date_to" value="<%= params[:date_to] %>" data-date-format='dd-M-yyyy'>
+          </label>
+          <button class="btn btn-primary">Submit</button>
+        </div>
+        <div>
+          <br>
+          quick links:
+          <% last_6_months.each do |month| %>
+            <span class="quick-link">
+              <%= link_to month.strftime("%B %Y"), stats_path(publisher_id: params[:publisher_id], date_from: month.strftime('%d-%b-%Y'), date_to: month.end_of_month.strftime('%d-%b-%Y')) %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+      <% if params[:publisher_id].present? %>
+        <input type="hidden" name="publisher_id" value="<%= params[:publisher_id] %>">
+      <% end %>
+
+  </div>
+</form>
+
+<div class="container">
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Headlines
+        </h3>
+      </div>
+      <table class="table table-striped">
+        <tbody>
+            <tr>
+              <th scope="row"><a href="/stats?publisher_id=34">Users</a></th>
+              <th class="numeric"><%= @stats['data']['attributes']['users'] %></th>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/stats?publisher_id=269">Posts</a></th>
+              <th class="numeric"><%= @stats['data']['attributes']['posts'] %></th>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+   <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Top 20 users</h3>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th class="numeric">No. of posts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @stats['data']['attributes']['top_users'].each do |user| %>
+            <tr>
+              <th scope="row"><%= user['user']['data']['attributes']['handle'] %></th>
+              <th class="numeric"><%= user['post_count'] %></th>
+            </tr>
+          <% end %>
+          <% if @stats['data']['attributes']['top_users'].size == 0 %>
+            <tr>
+              <th scope="row">-</th>
+              <th class="numeric">-</th>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+  $(document).ready(function() {
+
+    $('#filter-button').click(function() {
+      $(this).hide();
+      $('#date-filter-form').show();
+    });
+
+    <% if params[:date_from].present? || params[:date_to].present? %>
+      $('#filter-button').trigger('click');
+    <% end %>
+
+
+  });
+</script>

@@ -3,15 +3,15 @@
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/"><span class="logo">Lets Encrypt Template</span></span></a>
+      <a class="navbar-brand" href="/"><span class="logo">VReel Admin UI</span></span></a>
     </div>
 
     <ul class="nav navbar-nav">
-
+      <li><%= link_to 'Stats', stats_path %></li>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to('Sign out', destroy_user_session_path) %></li>
+      <li><%= link_to('Sign out', sessions_destroy_path) %></li>
     </ul>
   </div>
 </nav>

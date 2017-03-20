@@ -76,4 +76,9 @@ Rails.application.configure do
 
   config.force_ssl = true
   config.middleware.insert_before ActionDispatch::SSL, Letsencrypt::Middleware
+
+  config.api_servers = {
+    'https://api.vreel.io' => ENV['PRODUCTION_APPLICATION_ID'],
+    'https://vreel-staging.herokuapp.com'  => ENV['STAGING_APPLICATION_ID']
+  }
 end
