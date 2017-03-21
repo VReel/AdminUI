@@ -1,0 +1,30 @@
+AllCops:
+  Exclude:
+    - db/*
+    - bin/*
+    - Rakefile
+
+Rails:
+  Enabled: true
+
+Documentation:
+  Enabled: false
+
+# Commonly used screens these days easily fit more than 80 characters.
+Metrics/LineLength:
+  Max: 120
+
+# Too short methods lead to extraction of single-use methods, which can make
+# the code easier to read (by naming things), but can also clutter the class
+Metrics/MethodLength:
+  Max: 26
+
+# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
+Metrics/ClassLength:
+  Max: 150
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false

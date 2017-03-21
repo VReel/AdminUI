@@ -1,0 +1,35 @@
+== README
+
+A base Rails 4.7.1 application with devise for login with lets encrypt for SSL, for use on heroku.
+
+We also have other useful stuff including
+
+* rspec
+
+* fabrication
+
+* delayed_job
+
+* bootstrap
+
+* fontawesome
+
+* capybara
+
+* brakeman
+
+* rubocop
+
+* .env
+
+See this
+
+https://github.com/cbetta/letsencrypt-rails-heroku
+
+and
+
+https://betta.io/blog/2016/10/28/using-letsencrypt-with-sinatra-on-heroku/
+
+this 
+
+for details of using lets encrypt.
