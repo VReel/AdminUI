@@ -1,35 +1,5 @@
 == README
 
-A base Rails 4.7.1 application with devise for login with lets encrypt for SSL, for use on heroku.
+A very simple and qucikly thrown together admin UI for the VReel API.
 
-We also have other useful stuff including
-
-* rspec
-
-* fabrication
-
-* delayed_job
-
-* bootstrap
-
-* fontawesome
-
-* capybara
-
-* brakeman
-
-* rubocop
-
-* .env
-
-See this
-
-https://github.com/cbetta/letsencrypt-rails-heroku
-
-and
-
-https://betta.io/blog/2016/10/28/using-letsencrypt-with-sinatra-on-heroku/
-
-this 
-
-for details of using lets encrypt.
+It uses Rails 4, and has no database. All interaction and persistence is exclusively with the VReel API.
