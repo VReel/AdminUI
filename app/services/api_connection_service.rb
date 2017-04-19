@@ -23,31 +23,33 @@ class ApiConnectionService
   end
 
   def get_stats(date_from, date_to)
-    res = get("/v1/stats?date_from=#{date_from}&date_to=#{date_to}" )
+    res = get("/v1/admin/stats?date_from=#{date_from}&date_to=#{date_to}" )
   end
 
   def get(path)
-    uri = URI(File.join(session['api_server'], path))
-
-    req = Net::HTTP::Get.new(uri)
-    set_auth_headers(req)
-
-    res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') do |http|
-      http.request(req)
-    end
-
-    session['access-token'] = res['access-token']
+    res = request(:get, path)
 
     JSON.parse(res.body)
   end
 
   def post(path, body)
+    request(:post, path, body)
+  end
+
+  def request(method, path, body = nil)
     uri = URI(File.join(session['api_server'], path))
 
-    req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-    puts 'HELLO'
+    req = if method == :get
+      Net::HTTP::Get
+    elsif method == :post
+      Net::HTTP::Post
+    else
+      raise "Unsupported method #{method}"
+    end.new(uri, 'Content-Type' => 'application/json')
+
     set_auth_headers(req)
-    req.body = body.to_json
+    req.body = body.to_json if body.present?
+
     res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') do |http|
       http.request(req)
     end
@@ -57,10 +59,6 @@ class ApiConnectionService
 
   def set_auth_headers(req)
     req['vreel-application-id'] = Rails.configuration.api_servers[session['api_server']]
-
-    puts session['api_server']
-    puts 'using ' + Rails.configuration.api_servers[session['api_server']]
-
     req['uid'] = session['uid'] if session['uid'].present?
     req['client'] = session['client'] if session['client'].present?
     req['access-token'] = session['access-token'] if session['access-token'].present?
