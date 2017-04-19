@@ -27,7 +27,7 @@ class ApiConnectionService
   end
 
   def get_flagged_posts(page_id)
-    res = get("/v1/admin/flagged_posts?page_id=#{page_id}" )
+    res = get("/v1/admin/flagged_posts?page=#{page_id}" )
   end
 
   def get(path)
