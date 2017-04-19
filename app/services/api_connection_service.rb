@@ -54,6 +54,8 @@ class ApiConnectionService
       http.request(req)
     end
 
+    reset_auth_token(res)
+
     res
   end
 
@@ -62,6 +64,10 @@ class ApiConnectionService
     req['uid'] = session['uid'] if session['uid'].present?
     req['client'] = session['client'] if session['client'].present?
     req['access-token'] = session['access-token'] if session['access-token'].present?
+  end
+
+  def reset_auth_token(res)
+    session['access-token'] = res['access-token'] if res['access-token'].present?
   end
 
   def get_error_message
