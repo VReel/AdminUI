@@ -26,6 +26,10 @@ class ApiConnectionService
     res = get("/v1/admin/stats?date_from=#{date_from}&date_to=#{date_to}" )
   end
 
+  def get_flagged_posts(page_id)
+    res = get("/v1/admin/flagged_posts?page_id=#{page_id}" )
+  end
+
   def get(path)
     res = request(:get, path)
 
