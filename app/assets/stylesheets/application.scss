@@ -18,3 +18,25 @@
 .quick-link {
   margin-left: 15px;
 }
+
+.post-row:hover {
+  cursor: pointer;
+  background-color: #ccc !important;
+}
+
+table.lr {
+  td {
+    vertical-align: top;
+  }
+}
+
+.li-title {
+  display: inline-block;
+  width: 100px;
+  font-weight: bold;
+}
+
+img.original {
+  min-width: 200px;
+  max-width: 1000px;
+}

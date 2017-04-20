@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/sessions/destroy', to: 'sessions#destroy'
   resources :sessions, only: [:new, :create]
   resources :stats, only: :index
+  resources :flagged_posts
 end
