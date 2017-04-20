@@ -8,7 +8,7 @@ class FlaggedPostsController < ApplicationController
       message = "Post #{params[:id]} marked as moderated"
     end
 
-    if res.code.to_i == 200
+    if res.code.to_i >= 200 && res.code.to_i <= 299
       flash[:notice] = message
       return redirect_to flagged_posts_path
     else
