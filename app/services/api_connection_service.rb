@@ -23,11 +23,23 @@ class ApiConnectionService
   end
 
   def get_stats(date_from, date_to)
-    res = get("/v1/admin/stats?date_from=#{date_from}&date_to=#{date_to}" )
+    get("/v1/admin/stats?date_from=#{date_from}&date_to=#{date_to}" )
   end
 
   def get_flagged_posts(page_id)
-    res = get("/v1/admin/flagged_posts?page=#{page_id}" )
+    get("/v1/admin/flagged_posts?page=#{page_id}" )
+  end
+
+  def get_flagged_post(post_id, page_id)
+    get("/v1/admin/flagged_posts/#{post_id}/flags?page=#{page_id}" )
+  end
+
+  def mark_flagged_post_as_moderated(post_id)
+    put("/v1/admin/flagged_posts/#{post_id}", { moderated: true} )
+  end
+
+  def delete_moderated_post(post_id)
+    delete("/v1/admin/flagged_posts/#{post_id}")
   end
 
   def get(path)
@@ -40,6 +52,14 @@ class ApiConnectionService
     request(:post, path, body)
   end
 
+  def put(path, body)
+    request(:put, path, body)
+  end
+
+  def delete(path)
+    request(:delete, path)
+  end
+
   def request(method, path, body = nil)
     uri = URI(File.join(session['api_server'], path))
 
@@ -47,6 +67,10 @@ class ApiConnectionService
       Net::HTTP::Get
     elsif method == :post
       Net::HTTP::Post
+    elsif method == :put
+      Net::HTTP::Put
+    elsif method == :delete
+      Net::HTTP::Delete
     else
       raise "Unsupported method #{method}"
     end.new(uri, 'Content-Type' => 'application/json')

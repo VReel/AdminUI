@@ -9,14 +9,14 @@
     <tr>
       <th></th>
       <th>Flags</th>
-      <th>By</th>
+      <th>Post author</th>
       <th>Caption edited?</th>
       <th>Likes</th>
       <th>Comments</th>
-      <th>Created</th>
+      <th>Post created</th>
     </tr>
     <% posts.each do |post| %>
-      <tr>
+      <tr class="post-row" data-post-id="<%= post.id %>">
         <td>
           <img src="<%= post.thumbnail_url %>">
         </td>
@@ -50,4 +50,9 @@
 <br>
 <br>
 
+<script>
+  $('.post-row').click(function() {
+    window.location = '<%= flagged_posts_url %>/' + $(this).data('post-id');
+  })
+</script>
 

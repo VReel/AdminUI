@@ -1,9 +1,14 @@
 class FlaggedPost
   attr_reader :data
   attr_reader :user
+  attr_reader :flag_data
 
   def initialize(data)
     @data = data
+  end
+
+  def id
+    data['id']
   end
 
   def user_id
@@ -50,5 +55,15 @@ class FlaggedPost
     included_data.each do |item|
       @user = item if item['id'] == user_id
     end
+    self
+  end
+
+  def attach_flag_details(flag_data)
+    @flag_data = flag_data
+    self
+  end
+
+  def flags
+    @flags ||= flag_data['data'].map { |flag_data| Flag.new(flag_data) }.each { |flag| flag.attach_user_details(flag_data['included']) }
   end
 end
