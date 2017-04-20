@@ -18,7 +18,7 @@
     <% posts.each do |post| %>
       <tr class="post-row" data-post-id="<%= post.id %>">
         <td>
-          <img src="<%= post.thumbnail_url %>">
+          <img class="thumbnail" src="<%= post.thumbnail_url %>">
         </td>
         <td>
           <%= post.flag_count %>
