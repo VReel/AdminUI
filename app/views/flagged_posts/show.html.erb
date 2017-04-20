@@ -1,0 +1,80 @@
+<div class="container">
+
+  <h3>Flagged Post Details</h3>
+
+  <div class="well">
+    <table class="lr">
+      <tr>
+        <td>
+          <img class="original" src="<%= flagged_post.original_url %>">
+        </td>
+        <td>
+          <ul>
+            <li>
+              <span class="li-title">Caption:</span> <%= flagged_post.caption %>
+            </li>
+            <li>
+              <span class="li-title">Author:</span> <%= flagged_post.user_handle %>
+            </li>
+            <li>
+              <span class="li-title">Edited?:</span> <%= flagged_post.edited ? 'Yes' : 'No' %>
+            </li>
+            <li>
+              <span class="li-title">Likes:</span> <%= flagged_post.like_count %>
+            </li>
+            <li>
+              <span class="li-title">Comments:</span> <%= flagged_post.comment_count %>
+            </li>
+            <li>
+              <span class="li-title">Created:</span> <%= flagged_post.created_at %>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>Actions</h3>
+
+  <%= form_tag(flagged_post_path(params[:id]), method: :put) %>
+    <%= submit_tag "Mark as moderated", class: "btn btn-primary btn-success" %>
+    <%= submit_tag "Delete", class: "btn btn-danger btn-primary" %>
+  </form>
+
+  <h3>Flagged <%= flagged_post.flag_count %> time<%= flagged_post.flag_count != 1 ? 's' : '' %></h3>
+
+  <% if flags_next_page_id.present? %>
+    <%= link_to 'Next page >', flagged_post_path(params[:id], page_id: flags_next_page_id), class: 'pull-right' %>
+  <% end %>
+  <br>
+
+  <table class="table table-striped">
+    <tr>
+      <th>Flag by</th>
+      <th>Reason</th>
+    </tr>
+
+    <% flagged_post.flags.each do |flag| %>
+      <tr>
+        <td><%= flag.user_handle %></td>
+        <td><%= flag.reason %></th>
+      </tr>
+    <% end %>
+  </table>
+
+  <% if flags_next_page_id.present? %>
+    <%= link_to 'Next page >', flagged_post_path(params[:id], page_id: flags_next_page_id), class: 'pull-right' %>
+  <% end %>
+
+  <script>
+    $('.btn-danger').click(function() {
+      return confirm("Delete this post?\n\nAre you sure - you can not undo this!\n\nNote: Right click and save the image for reference if you need to - it will be deleted and unretrievable if you delete it")
+
+    });
+
+    $('.btn-success').click(function() {
+      return confirm("Mark this post as moderated?\n\nAre you sure - you can not undo this!")
+    });
+  </script>
+</div>
+

@@ -42,6 +42,7 @@ Rails.application.configure do
   config.api_servers = {
     'http://0.0.0.0:3000' => ENV['DEV_APPLICATION_ID'],
     'https://api.vreel.io' => ENV['PRODUCTION_APPLICATION_ID'],
-    'https://vreel-staging.herokuapp.com'  => ENV['STAGING_APPLICATION_ID']
+    'https://vreel-staging.herokuapp.com'  => ENV['STAGING_APPLICATION_ID'],
+    'https://vreel-development.herokuapp.com'  => ENV['HEROKU_DEVELOPMENT_APPLICATION_ID']
   }
 end
