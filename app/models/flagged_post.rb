@@ -27,6 +27,8 @@ class FlaggedPost < Base
   end
 
   def flags
-    @flags ||= flag_data['data'].map { |flag_data| Flag.new(flag_data) }.each { |flag| flag.attach_user_details(flag_data['included']) }
+    @flags ||= flag_data['data']
+               .map { |flag_data| Flag.new(flag_data) }
+               .each { |flag| flag.attach_user_details(flag_data['included']) }
   end
 end

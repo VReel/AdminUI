@@ -29,9 +29,6 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Max: 160
 
-Metrics/BlockLength:
-  Enabled: false
-
 Style/ClassAndModuleChildren:
   Enabled: false
 
@@ -42,4 +39,7 @@ Style/PredicateName:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/AccessorMethodName:
   Enabled: false

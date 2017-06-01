@@ -73,7 +73,7 @@ class ApiConnectionService
             Net::HTTP::Delete
           else
             raise "Unsupported method #{method}"
-    end.new(uri, 'Content-Type' => 'application/json')
+          end.new(uri, 'Content-Type' => 'application/json')
 
     set_auth_headers(req)
     req.body = body.to_json if body.present?
@@ -89,9 +89,9 @@ class ApiConnectionService
 
   def set_auth_headers(req)
     req['vreel-application-id'] = Rails.configuration.api_servers[session['api_server']]
-    req['uid'] = session['uid'] if session['uid'].present?
-    req['client'] = session['client'] if session['client'].present?
-    req['access-token'] = session['access-token'] if session['access-token'].present?
+    req['uid'] = session['uid']
+    req['client'] = session['client']
+    req['access-token'] = session['access-token']
   end
 
   def reset_auth_token(res)

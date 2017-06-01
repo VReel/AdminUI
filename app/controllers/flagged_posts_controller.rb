@@ -28,7 +28,9 @@ class FlaggedPostsController < ApplicationController
   end
 
   def posts
-    @posts ||= posts_api_data['data'].map { |post_data| FlaggedPost.new(post_data) }.each { |post| post.attach_user_details(posts_api_data['included']) }
+    @posts ||= posts_api_data['data']
+               .map { |post_data| FlaggedPost.new(post_data) }
+               .each { |post| post.attach_user_details(posts_api_data['included']) }
   end
   helper_method :posts
 
