@@ -27,7 +27,7 @@ class Base
 
   # Automagically create methods on the attributes packet.
   def method_missing(method_id, *arguments, &block)
-    return data['attributes'][method_id.to_s] if !data['attributes'][method_id.to_s].nil? && arguments.none? && block.nil?
+    return data['attributes'][method_id.to_s] if data['attributes'].key?(method_id.to_s) && arguments.none? && block.nil?
 
     super
   end
