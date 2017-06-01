@@ -22,6 +22,10 @@ class ApiConnectionService
     false
   end
 
+  def get_posts(page_id)
+    get("/v1/public_timeline?page=#{page_id}")
+  end
+
   def get_stats(date_from, date_to)
     get("/v1/admin/stats?date_from=#{date_from}&date_to=#{date_to}")
   end

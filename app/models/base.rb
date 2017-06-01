@@ -1,5 +1,6 @@
 class Base
   attr_reader :data
+  attr_reader :user
 
   def initialize(data)
     @data = data
@@ -26,7 +27,7 @@ class Base
 
   # Automagically create methods on the attributes packet.
   def method_missing(method_id, *arguments, &block)
-    return data['attributes'][method_id.to_s] if data['attributes'][method_id.to_s].present? && arguments.none? && block.nil?
+    return data['attributes'][method_id.to_s] if !data['attributes'][method_id.to_s].nil? && arguments.none? && block.nil?
 
     super
   end

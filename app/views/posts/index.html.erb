@@ -1,0 +1,58 @@
+<div class="container">
+  <% if next_page_id.present? %>
+    <%= link_to 'Next page >', posts_path(page_id: next_page_id), class: 'pull-right' %>
+  <% end %>
+
+  <h3>Posts</h3>
+
+  <table class="table table-striped">
+    <tr>
+      <th></th>
+      <th>Post author</th>
+      <th>Caption</th>
+      <th>Likes</th>
+      <th>Comments</th>
+      <th>Post created</th>
+    </tr>
+    <% posts.each do |post| %>
+      <tr class="post-row" data-post-id="<%= post.id %>">
+        <td>
+          <img class="thumbnail" src="<%= post.thumbnail_url %>">
+        </td>
+        <td>
+          <%= post.user_handle %>
+        </td>
+        <td>
+          <%= post.caption %>
+          <% if post.edited  %>
+            <br>
+            Edited
+          <% end %>
+        </td>
+        <td>
+          <%= post.like_count %>
+        </td>
+        <td>
+          <%= post.comment_count %>
+        </td>
+        <td>
+          <%= post.created_at %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<% if next_page_id.present? %>
+  <%= link_to 'Next page >', posts_path(page_id: next_page_id), class: 'pull-right' %>
+<% end %>
+
+<br>
+<br>
+
+<script>
+  $('.post-row').click(function() {
+    window.location = '<%= posts_url %>/' + $(this).data('post-id');
+  })
+</script>
+

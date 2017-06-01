@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create]
   resources :stats, only: :index
   resources :flagged_posts
+  resources :posts
 end
