@@ -22,12 +22,19 @@ class ApiConnectionService
     false
   end
 
+  def get_user(user_id)
+    get("/v1/users/#{user_id}")
+  end
+
+  def get_user_posts(user_id)
+    get("/v1/users/#{user_id}/posts")
+  end
+
   def get_posts(page_id)
     get("/v1/public_timeline?page=#{page_id}")
   end
 
   def get_post(post_id)
-    puts "/v1/posts/#{post_id}"
     get("/v1/posts/#{post_id}")
   end
 

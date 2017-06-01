@@ -1,0 +1,45 @@
+<h3>Posts</h3>
+
+<table class="table table-striped">
+  <tr>
+    <th></th>
+    <th>Post author</th>
+    <th>Caption</th>
+    <th>Likes</th>
+    <th>Comments</th>
+    <th>Post created</th>
+  </tr>
+  <% posts.each do |post| %>
+    <tr class="post-row" data-post-id="<%= post.id %>">
+      <td>
+        <img class="thumbnail" src="<%= post.thumbnail_url %>">
+      </td>
+      <td>
+        <%= link_to post.user_handle, user_path(post.user_id) %>
+      </td>
+      <td>
+        <%= post.caption %>
+        <% if post.edited  %>
+          <br>
+          <span class="edited"><i class="fa fa-pencil" aria-hidden="true"></i> Edited</span>
+        <% end %>
+      </td>
+      <td>
+        <%= post.like_count %>
+      </td>
+      <td>
+        <%= post.comment_count %>
+      </td>
+      <td>
+        <%= post.created_at %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+
+<script>
+  $('.post-row').click(function() {
+    window.location = '<%= posts_url %>/' + $(this).data('post-id');
+  })
+</script>

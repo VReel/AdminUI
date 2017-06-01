@@ -1,6 +1,10 @@
 <div class="container">
 
-  <h3>Post Details</h3>
+  <h3>Post Details <small><a  title="View API source JSON" data-toggle="tooltip" class="toggle-api-data"><i class="fa fa-cog" aria-hidden="true"></i></a></small></h3>
+  <br>
+  <pre class="api-data hidden">
+    <%= JSON.pretty_generate(post_api_data)  %>
+  </pre>
 
   <div class="well">
     <table class="lr">
@@ -14,7 +18,7 @@
               <span class="li-title">Caption:</span> <%= post.caption %>
             </li>
             <li>
-              <span class="li-title">Author:</span> <%= post.user_handle %>
+              <span class="li-title">Author:</span> <%= link_to post.user_handle, user_path(post.user_id) %>
             </li>
             <li>
               <span class="li-title">Likes:</span> <%= post.like_count %>
@@ -49,8 +53,9 @@
 
       <% comments.each do |comment| %>
         <tr>
-          <td><%= comment.user_handle %></td>
-          <td><%= comment.text %></th>
+          <td><%= link_to comment.user_handle, user_path(comment.user_id) %></td>
+          <td><%= comment.text %></td>
+          <td><%= comment.created_at %></td>
         </tr>
       <% end %>
     </table>

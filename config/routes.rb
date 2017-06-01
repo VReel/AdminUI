@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :stats, only: :index
   resources :flagged_posts
   resources :posts
+  resources :users
 end
