@@ -1,6 +1,6 @@
 class FlaggedPostsController < ApplicationController
   def update
-    if params['commit'] == 'Delete'
+    if params[:commit] == 'Delete'
       res = connection.delete_moderated_post(params[:id])
       message = "Post #{params[:id]} deleted"
     else
@@ -8,7 +8,7 @@ class FlaggedPostsController < ApplicationController
       message = "Post #{params[:id]} marked as moderated"
     end
 
-    if res.code.to_i >= 200 && res.code.to_i <= 299
+    if res.is_a? Net::HTTPSuccess
       flash[:notice] = message
       return redirect_to flagged_posts_path
     else
@@ -33,10 +33,10 @@ class FlaggedPostsController < ApplicationController
   helper_method :posts
 
   def flagged_post
-    @flagged_post ||= FlaggedPost.
-                        new(flagged_post_api_data['included'].detect { |item| item['id'] == params[:id] }).
-                        attach_flag_details(flagged_post_api_data).
-                        attach_user_details(flagged_post_api_data['included'])
+    @flagged_post ||= FlaggedPost
+                      .new(flagged_post_api_data['included'].detect { |item| item['id'] == params[:id] })
+                      .attach_flag_details(flagged_post_api_data)
+                      .attach_user_details(flagged_post_api_data['included'])
   end
   helper_method :flagged_post
 

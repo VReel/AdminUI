@@ -1,5 +1,4 @@
-class Flag
-  attr_reader :data
+class Flag < Base
   attr_reader :user
 
   def initialize(data)
@@ -12,10 +11,6 @@ class Flag
 
   def user_id
     data['relationships']['user']['data']['id']
-  end
-
-  def reason
-    data['attributes']['reason']
   end
 
   def user_handle

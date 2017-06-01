@@ -6,7 +6,7 @@ class StatsController < ApplicationController
   protected
 
   def last_6_months
-    (0..5).map { |month|  (5.months.ago + month.months).beginning_of_month }
+    (0..5).map { |month| (5.months.ago + month.months).beginning_of_month }
   end
   helper_method :last_6_months
 end

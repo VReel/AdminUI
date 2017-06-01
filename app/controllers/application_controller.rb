@@ -8,12 +8,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def current_user
+  def current_user_present?
     session['uid'].present?
   end
 
   def layout_by_resource
-    if current_user.present?
+    if current_user_present?
       'application'
     else
       'anonymous_application'
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_anonymous
-    return if current_user
+    return if current_user_present?
     return if request.path == new_session_path
 
     redirect_to new_session_path
