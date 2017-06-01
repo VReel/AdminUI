@@ -1,23 +1,39 @@
 class FlaggedPostsController < ApplicationController
   def update
-    if params[:commit] == 'Delete'
-      res = connection.delete_moderated_post(params[:id])
-      message = "Post #{params[:id]} deleted"
-    else
-      res = connection.mark_flagged_post_as_moderated(params[:id])
-      message = "Post #{params[:id]} marked as moderated"
-    end
+    return delete_post if params[:commit] == 'Delete'
 
-    if res.is_a? Net::HTTPSuccess
-      flash[:notice] = message
-      return redirect_to flagged_posts_path
-    else
-      flash[:alert] = "Something went wrong: #{res.body.first(200)}"
-      return redirect_to flagged_post_path(params[:id])
-    end
+    mark_post_moderated
   end
 
   protected
+
+  def delete_post
+    res = connection.delete_moderated_post(params[:id])
+
+    if res.is_a? Net::HTTPSuccess
+      flash[:notice] = "Post #{params[:id]} deleted"
+      return redirect_to flagged_posts_path
+    end
+
+    handle_failed_request(res)
+  end
+
+  def mark_post_moderated
+    res = connection.mark_flagged_post_as_moderated(params[:id])
+
+    if res.is_a? Net::HTTPSuccess
+      flash[:notice] = "Post #{params[:id]} marked as moderated"
+      return redirect_to flagged_posts_path
+    end
+
+    handle_failed_request(res)
+  end
+
+  def handle_failed_request(res)
+    flash[:alert] = "Something went wrong: #{res.body.first(200)}"
+
+    redirect_to flagged_post_path(params[:id])
+  end
 
   def posts_api_data
     @posts_api_data ||= connection.get_flagged_posts(params[:page_id])
