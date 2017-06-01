@@ -80,7 +80,7 @@ class ApiConnectionService
     request(:delete, path)
   end
 
-  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable all
   def request(method, path, body = nil)
     uri = URI(File.join(session['api_server'], path))
 
@@ -103,13 +103,13 @@ class ApiConnectionService
       http.request(req)
     end
 
-    raise ApiNoAuthException.new if res.code.to_i == 401
+    raise ApiNoAuthException, 'No auth' if res.code.to_i == 401
 
     reset_auth_token(res)
 
     res
   end
-  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable all
 
   def set_auth_headers(req)
     req['vreel-application-id'] = Rails.configuration.api_servers[session['api_server']]

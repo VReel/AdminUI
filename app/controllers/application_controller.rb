@@ -38,6 +38,6 @@ class ApplicationController < ActionController::Base
   def no_auth
     session['uid'] = nil
     flash[:notice] = 'You have been logged out by the API'
-    return redirect_to '/'
+    redirect_to '/'
   end
 end

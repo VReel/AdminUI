@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   helper_method :post_api_data
 
   def comments_api_data
-    comments_api_data ||= connection.get_post_comments(params[:id])
+    @comments_api_data ||= connection.get_post_comments(params[:id])
   end
   helper_method :comments_api_data
 

@@ -30,7 +30,7 @@ class Base
   def created_at
     return unless data['attributes']['created_at'].present?
 
-    Time.parse(data['attributes']['created_at'])
+    Time.zone.parse(data['attributes']['created_at'])
   end
 
   # Automagically create methods on the attributes packet.
