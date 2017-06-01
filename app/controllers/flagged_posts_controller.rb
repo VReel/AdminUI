@@ -35,10 +35,12 @@ class FlaggedPostsController < ApplicationController
     redirect_to flagged_post_path(params[:id])
   end
 
+  # List of flagged posts.
   def posts_api_data
     @posts_api_data ||= connection.get_flagged_posts(params[:page_id])
   end
 
+  # Single flagged post and it's flags.
   def flagged_post_api_data
     @flagged_post_api_data ||= connection.get_flagged_post(params[:id], params[:page_id])
   end
@@ -54,7 +56,6 @@ class FlaggedPostsController < ApplicationController
     @flagged_post ||= FlaggedPost
                       .new(flagged_post_api_data['included'].detect { |item| item['id'] == params[:id] })
                       .attach_flag_details(flagged_post_api_data)
-                      .attach_user_details(flagged_post_api_data['included'])
   end
   helper_method :flagged_post
 
