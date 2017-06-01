@@ -60,6 +60,7 @@ class ApiConnectionService
     request(:delete, path)
   end
 
+  # rubocop:disable Metrics/AbcSize
   def request(method, path, body = nil)
     uri = URI(File.join(session['api_server'], path))
 
@@ -86,6 +87,7 @@ class ApiConnectionService
 
     res
   end
+  # rubocop:enable Metrics/AbcSize
 
   def set_auth_headers(req)
     req['vreel-application-id'] = Rails.configuration.api_servers[session['api_server']]
