@@ -26,6 +26,15 @@ class ApiConnectionService
     get("/v1/public_timeline?page=#{page_id}")
   end
 
+  def get_post(post_id)
+    puts "/v1/posts/#{post_id}"
+    get("/v1/posts/#{post_id}")
+  end
+
+  def get_post_comments(post_id)
+    get("/v1/posts/#{post_id}/comments")
+  end
+
   def get_stats(date_from, date_to)
     get("/v1/admin/stats?date_from=#{date_from}&date_to=#{date_to}")
   end
@@ -86,6 +95,8 @@ class ApiConnectionService
     res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
       http.request(req)
     end
+
+    raise ApiNoAuthException.new if res.code.to_i == 401
 
     reset_auth_token(res)
 

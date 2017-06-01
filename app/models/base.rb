@@ -19,10 +19,18 @@ class Base
   end
 
   def attach_user_details(included_data)
+    included_data ||= []
+
     included_data.each do |item|
       @user = item if item['id'] == user_id
     end
     self
+  end
+
+  def created_at
+    return unless data['attributes']['created_at'].present?
+
+    Time.parse(data['attributes']['created_at'])
   end
 
   # Automagically create methods on the attributes packet.
