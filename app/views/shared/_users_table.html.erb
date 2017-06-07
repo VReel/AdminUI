@@ -1,0 +1,47 @@
+<table class="table table-striped">
+  <tr>
+    <th></th>
+    <th>Handle</th>
+    <th>Email</th>
+    <th>Posts</th>
+    <th>Followers</th>
+    <th>Following</th>
+    <th>User created</th>
+  </tr>
+  <% users.each do |user| %>
+    <tr class="post-row" data-user-id="<%= user.id %>">
+      <td>
+        <img class="thumbnail" src="<%= user.thumbnail_url %>">
+      </td>
+      <td>
+        <%= user.handle %>
+      </td>
+      <td>
+
+      </td>
+      <td>
+        <% if user.post_count > 0 %>
+          <%= link_to user.post_count, posts_path(user: user.handle) %>
+        <% else %>
+          <%= user.post_count %>
+        <% end %>
+      </td>
+      <td>
+        <%= user.follower_count %>
+      </td>
+      <td>
+        <%= user.following_count %>
+      </td>
+      <td>
+        <%= user.created_at %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+
+<script>
+  $('.post-row').click(function() {
+    window.location = '<%= users_url %>/' + $(this).data('user-id');
+  })
+</script>
