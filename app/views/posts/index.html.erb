@@ -1,0 +1,110 @@
+<div class="container">
+  <h1>Posts <small>Page <%= page %> of <%= count %> posts</small></h1>
+
+  <div class="well filter-well">
+    <%= form_tag posts_path, method: :get %>
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Filters: <a class="filters-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h4>
+          <div class="filters hidden">
+            <div class="filter-wrapper">
+              <h5>User <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>
+                  <input type="text" name="user" value="<%= params[:user] %>" class="form-control">
+                </label>
+              </div>
+            </div>
+            <div class="filter-wrapper">
+              <h5>Date posted <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>From:
+                  <input type="text" data-provide='datepicker' name="date_from" value="<%= params[:date_from] %>" data-date-format='dd-M-yyyy' class="form-control">
+                </label>
+                <label>To:
+                  <input type="text" data-provide='datepicker' name="date_to" value="<%= params[:date_to] %>" data-date-format='dd-M-yyyy' class="form-control">
+                </label>
+              </div>
+            </div>
+            <div class="filter-wrapper">
+              <h5>Likes <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>At least:
+                  <input name="min_likes" value="<%= params[:min_likes] %>" class="form-control" type="number">
+                </label>
+                <label>At most:
+                  <input name="max_likes" value="<%= params[:max_likes] %>" class="form-control" type="number">
+                </label>
+              </div>
+            </div>
+            <div class="filter-wrapper">
+              <h5>Comments <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>At least:
+                  <input name="min_comments" value="<%= params[:min_comments] %>" class="form-control" type="number">
+                </label>
+                <label>At most:
+                  <input name="max_comments" value="<%= params[:max_comments] %>" class="form-control" type="number">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h4>Order by:</h4>
+          <div>
+            <label>
+              <%= select_tag :sort, options_for_select(sort_options, params[:sort]), class: 'form-control' %>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <br><br>
+          <div class="text-align-right">
+            <button class="btn btn-primary">Update results</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <% if posts.any? %>
+    <%= render 'shared/pagination_links', path: :posts_path, params: filter_params %>
+    <%= render 'shared/posts_table', posts: posts %>
+    <%= render 'shared/pagination_links', path: :posts_path, params: filter_params %>
+  <% else %>
+    <h2>No results</h2>
+  <% end %>
+</div>
+
+<script>
+  $('.filter-toggle').click(function() {
+    var $icon = $(this).find('.fa');
+    $(this).parents('.filter-wrapper').find('.filter').toggleClass('hidden')
+    if ($icon.hasClass('fa-caret-up')) {
+      $icon.removeClass('fa-caret-up').addClass('fa-caret-down');
+    }
+    else {
+      $icon.removeClass('fa-caret-down').addClass('fa-caret-up');
+    }
+  });
+
+  $('.filters-toggle').click(function() {
+    var $icon = $(this).find('.fa').first();
+    $('.filters').toggleClass('hidden')
+    if ($icon.hasClass('fa-caret-up')) {
+      $icon.removeClass('fa-caret-up').addClass('fa-caret-down');
+    }
+    else {
+      $icon.removeClass('fa-caret-down').addClass('fa-caret-up');
+    }
+  });
+
+  $('.filter-wrapper').each(function() {
+    if ($(this).find('input[value]:not([value=""])').length) {
+      $(this).find('.filter-toggle').trigger('click');
+      $('.filters-toggle').trigger('click');
+    }
+  });
+</script>
+

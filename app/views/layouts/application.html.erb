@@ -7,11 +7,15 @@
     </div>
 
     <ul class="nav navbar-nav">
-      <li><%= link_to 'Stats', stats_path %></li>
+      <%= active_link_to 'Posts', posts_path, wrap_tag: :li %>
     </ul>
 
     <ul class="nav navbar-nav">
-      <li><%= link_to 'Flagged posts', flagged_posts_path %></li>
+      <%= active_link_to 'Stats', stats_path, wrap_tag: :li %>
+    </ul>
+
+    <ul class="nav navbar-nav">
+      <%= active_link_to 'Flagged posts', flagged_posts_path, wrap_tag: :li %>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">

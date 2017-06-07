@@ -1,0 +1,68 @@
+<div class="container">
+
+  <h3>Post Details <small><a  title="View API source JSON" data-toggle="tooltip" class="toggle-api-data"><i class="fa fa-cog" aria-hidden="true"></i></a></small></h3>
+  <br>
+  <pre class="api-data hidden">
+    <%= JSON.pretty_generate(post_api_data)  %>
+  </pre>
+
+  <div class="well">
+    <table class="lr">
+      <tr>
+        <td>
+          <img class="original" src="<%= post.original_url %>">
+        </td>
+        <td>
+          <ul>
+            <li>
+              <span class="li-title">Caption:</span> <%= post.caption %>
+            </li>
+            <li>
+              <span class="li-title">Author:</span> <%= link_to post.user_handle, user_path(post.user_id) %>
+            </li>
+            <li>
+              <span class="li-title">Likes:</span> <%= post.like_count %>
+            </li>
+            <li>
+              <span class="li-title">Comments:</span> <%= post.comment_count %>
+            </li>
+            <li>
+              <span class="li-title">Created:</span> <%= post.created_at %>
+            </li>
+            <li>
+              <span class="li-title">Flag count:</span> <%= post.created_at %>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <% if comments_next_page_id.present? %>
+    <%= link_to 'Next page  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>'.html_safe, post_path(params[:id], page_id: comments_next_page_id), class: 'pull-right' %>
+  <% end %>
+  <br>
+
+  <% if comments.any? %>
+    <h3>Comments</h3>
+    <table class="table table-striped">
+      <tr>
+        <th>Comment by</th>
+        <th>Text</th>
+      </tr>
+
+      <% comments.each do |comment| %>
+        <tr>
+          <td><%= link_to comment.user_handle, user_path(comment.user_id) %></td>
+          <td><%= comment.text %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <h3>No comments</h3>
+  <% end %>
+
+  <% if comments_next_page_id.present? %>
+    <%= link_to 'Next page >', post_path(params[:id], page_id: comments_next_page_id), class: 'pull-right' %>
+  <% end %>
+</div>

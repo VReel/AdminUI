@@ -1,10 +1,5 @@
-class FlaggedPost < Base
+class FlaggedPost < Post
   attr_reader :flag_data
-  attr_reader :user
-
-  def id
-    data['id']
-  end
 
   def attach_flag_details(flag_data)
     @flag_data = flag_data

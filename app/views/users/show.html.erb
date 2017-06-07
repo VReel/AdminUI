@@ -1,0 +1,48 @@
+<h3>User Details <small><a  title="View API source JSON" data-toggle="tooltip" class="toggle-api-data"><i class="fa fa-cog" aria-hidden="true"></i></a></small></h3>
+<br>
+<pre class="api-data hidden">
+  <%= JSON.pretty_generate(user_api_data)  %>
+</pre>
+
+<div class="well">
+  <table class="lr">
+    <tr>
+      <td>
+        <img class="original" src="<%= user.original_url %>">
+      </td>
+      <td>
+        <ul>
+          <li>
+            <span class="li-title">Handle:</span> <%= user.handle %>
+          </li>
+          <li>
+            <span class="li-title">Email:</span>
+          </li>
+          <li>
+            <span class="li-title">Profile:</span> <%= user.profile %>
+          </li>
+          <li>
+            <span class="li-title">Followers:</span> <%= user.follower_count %>
+          </li>
+          <li>
+            <span class="li-title">Following:</span> <%= user.following_count %>
+          </li>
+          <li>
+            <span class="li-title">Posts:</span>
+            <% if user.post_count > 0 %>
+              <%= link_to user.post_count, posts_path(user: user.handle) %>
+            <% else %>
+              <%= user.post_count %>
+            <% end %>
+          </li>
+          <li>
+            <span class="li-title">Created:</span> <%= user.created_at %>
+          </li>
+          <li>
+            <span class="li-title">Confirmed:</span>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>

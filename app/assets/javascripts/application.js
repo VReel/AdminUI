@@ -14,3 +14,15 @@
 //= require jquery_ujs
 //= require bootstrap-datepicker
 //= require_tree .
+//
+
+$(function() {
+  $('.toggle-api-data').click(function() {
+    if ($('.api-data').is(':visible')) {
+      $('.api-data').addClass('hidden');
+    }
+    else {
+      $('.api-data').removeClass('hidden');
+    }
+  });
+});
