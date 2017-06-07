@@ -8,7 +8,7 @@ class ApiConnectionService
   end
 
   def sign_in(email, password)
-    res = post('/v1/users/sign_in', login: email, password: password)
+    res = request(:post, '/v1/users/sign_in', { login: email, password: password }, throw_on_error: false)
 
     if res.code.to_i == 200
       session['uid'] = res['uid']
@@ -31,7 +31,7 @@ class ApiConnectionService
   end
 
   def get_posts(page_id)
-    get("/v1/public_timeline?page=#{page_id}")
+    get("/v1/admin/posts?page=#{page_id}")
   end
 
   def get_post(post_id)
@@ -81,7 +81,7 @@ class ApiConnectionService
   end
 
   # rubocop:disable all
-  def request(method, path, body = nil)
+  def request(method, path, body = nil, throw_on_error: true)
     uri = URI(File.join(session['api_server'], path))
 
     req = if method == :get
@@ -103,7 +103,7 @@ class ApiConnectionService
       http.request(req)
     end
 
-    raise ApiNoAuthException, 'No auth' if res.code.to_i == 401
+    raise ApiNoAuthException, 'No auth' if res.code.to_i == 401 && throw_on_error
 
     reset_auth_token(res)
 
