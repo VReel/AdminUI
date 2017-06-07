@@ -1,8 +1,12 @@
 class ApiNoAuthException < StandardError
 end
 
+class ApiError < StandardError
+end
+
 class ApplicationController < ActionController::Base
   rescue_from ApiNoAuthException, with: :no_auth
+  rescue_from ApiError, with: :handle_api_error
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -38,6 +42,11 @@ class ApplicationController < ActionController::Base
   def no_auth
     session['uid'] = nil
     flash[:notice] = 'You have been logged out by the API'
+    redirect_to '/'
+  end
+
+  def handle_api_error(exception)
+    flash[:alert] = exception.message
     redirect_to '/'
   end
 end

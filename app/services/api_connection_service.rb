@@ -103,7 +103,10 @@ class ApiConnectionService
       http.request(req)
     end
 
-    raise ApiNoAuthException, 'No auth' if res.code.to_i == 401 && throw_on_error
+    if throw_on_error
+      raise ApiNoAuthException, 'No auth' if res.code.to_i == 401
+      raise ApiError, "#{res.uri} returned a #{res.code} error" if res.code.to_i >= 400
+    end
 
     reset_auth_token(res)
 
