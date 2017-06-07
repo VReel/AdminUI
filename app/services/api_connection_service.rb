@@ -30,8 +30,8 @@ class ApiConnectionService
     get("/v1/users/#{user_id}/posts")
   end
 
-  def get_posts(page_id)
-    get("/v1/admin/posts?page=#{page_id}")
+  def get_posts(page_id, sort: nil)
+    get("/v1/admin/posts?page=#{page_id}&sort=#{sort}")
   end
 
   def get_post(post_id)

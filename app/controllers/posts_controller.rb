@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   protected
 
   def posts_api_data
-    @posts_api_data ||= connection.get_posts(params[:page_id])
+    @posts_api_data ||= connection.get_posts(params[:page_id], sort: params[:sort])
   end
 
   def post_api_data
@@ -43,4 +43,26 @@ class PostsController < ApplicationController
     posts_api_data['meta'] && posts_api_data['meta']['next_page_id']
   end
   helper_method :next_page_id
+
+  def sort_options
+    {
+      'Created At DESC' => :created_at_desc,
+      'Created At ASC' => :created_at_asc,
+      'Likes DESC' => :likes_desc,
+      'Likes ASC' => :likes_asc,
+      'Comments DESC' => :comments_desc,
+      'Comments ASC' => :comments_asc,
+    }
+  end
+  helper_method :sort_options
+
+  def page
+    Integer(params[:page_id] || 0) + 1
+  end
+  helper_method :page
+
+  def count
+    posts_api_data['meta']['total']
+  end
+  helper_method :count
 end

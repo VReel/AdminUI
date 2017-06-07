@@ -1,12 +1,22 @@
 <div class="container">
-  <% if next_page_id.present? %>
-    <%= link_to 'Next page >', posts_path(page_id: next_page_id), class: 'pull-right' %>
-  <% end %>
+  <h1>Posts <small>Page <%= page %> of <%= count %> posts</small></h1>
 
+  <div class="well">
+    <%= form_tag posts_path, method: :get %>
+      <div>
+        <label>
+          Order by:
+          <%= select_tag :sort, options_for_select(sort_options, params[:sort]), class: 'form-control' %>
+        </label>
+      </div>
+
+      <button class="btn btn-primary">Update</button>
+    </form>
+  </div>
+
+  <%= render 'shared/pagination_links' %>
   <%= render 'shared/posts_table', posts: posts %>
+  <%= render 'shared/pagination_links' %>
 </div>
 
-<% if next_page_id.present? %>
-  <%= link_to 'Next page >', posts_path(page_id: next_page_id), class: 'pull-right' %>
-<% end %>
 
