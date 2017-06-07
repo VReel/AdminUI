@@ -14,9 +14,9 @@
     </form>
   </div>
 
-  <%= render 'shared/pagination_links' %>
+  <%= render 'shared/pagination_links', path: :posts_path, params: params.slice(:sort) %>
   <%= render 'shared/posts_table', posts: posts %>
-  <%= render 'shared/pagination_links' %>
+  <%= render 'shared/pagination_links', path: :posts_path, params: params.slice(:sort) %>
 </div>
 
 

@@ -40,5 +40,15 @@
 </div>
 
 <% if posts.any? %>
+  <div class="pagination">
+    <% if next_page_id.present? %>
+      <%= link_to 'Next page  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>'.html_safe, user_path(user.id, page_id: next_page_id), class: 'pull-right' %>
+    <% end %>
+  </div>
   <%= render 'shared/posts_table', posts: posts %>
+  <div class="pagination">
+    <% if next_page_id.present? %>
+      <%= link_to 'Next page  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>'.html_safe, user_path(user.id, page_id: next_page_id), class: 'pull-right' %>
+    <% end %>
+  </div>
 <% end %>

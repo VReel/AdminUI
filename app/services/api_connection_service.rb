@@ -26,8 +26,8 @@ class ApiConnectionService
     get("/v1/users/#{user_id}")
   end
 
-  def get_user_posts(user_id)
-    get("/v1/users/#{user_id}/posts")
+  def get_user_posts(user_id, page_id)
+    get("/v1/users/#{user_id}/posts?page=#{page_id}")
   end
 
   def get_posts(page_id, sort: nil)
