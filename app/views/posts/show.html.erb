@@ -15,7 +15,7 @@
         <td>
           <ul>
             <li>
-              <span class="li-title">Caption:</span> <%= post.caption %>
+              <span class="li-title">Caption:</span><span class="caption"><%= post.caption %></span>
             </li>
             <li>
               <span class="li-title">Author:</span> <%= link_to post.user_handle, user_path(post.user_id) %>
@@ -28,9 +28,6 @@
             </li>
             <li>
               <span class="li-title">Created:</span> <%= post.created_at %>
-            </li>
-            <li>
-              <span class="li-title">Flag count:</span> <%= post.created_at %>
             </li>
           </ul>
         </td>
