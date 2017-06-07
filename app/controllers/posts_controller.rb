@@ -2,7 +2,10 @@ class PostsController < ApplicationController
   protected
 
   def posts_api_data
-    @posts_api_data ||= connection.get_posts(params[:page_id], sort: params[:sort])
+    @posts_api_data ||= connection.get_posts(
+      params[:page_id],
+      filter_params
+    )
   end
 
   def post_api_data
@@ -11,7 +14,7 @@ class PostsController < ApplicationController
   helper_method :post_api_data
 
   def comments_api_data
-    @comments_api_data ||= connection.get_post_comments(params[:id])
+    @comments_api_data ||= connection.get_post_comments(params[:id], params[:page_id])
   end
   helper_method :comments_api_data
 
@@ -51,7 +54,7 @@ class PostsController < ApplicationController
       'Likes DESC' => :likes_desc,
       'Likes ASC' => :likes_asc,
       'Comments DESC' => :comments_desc,
-      'Comments ASC' => :comments_asc,
+      'Comments ASC' => :comments_asc
     }
   end
   helper_method :sort_options
@@ -65,4 +68,9 @@ class PostsController < ApplicationController
     posts_api_data['meta']['total']
   end
   helper_method :count
+
+  def filter_params
+    params.slice(:sort, :date_from, :date_to, :user, :min_comments, :max_comments, :min_likes, :max_likes)
+  end
+  helper_method :filter_params
 end

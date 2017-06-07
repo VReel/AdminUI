@@ -15,6 +15,10 @@
  *= require bootstrap-datepicker3
  */
 
+.text-align-right {
+  text-align: right
+}
+
 .quick-link {
   margin-left: 15px;
 }
@@ -74,3 +78,12 @@ h1 {
   border-radius: 4px;
 }
 
+.filter-well {
+  .form-control {
+    font-size: 12px;
+  }
+
+  label {
+    font-weight: normal;
+  }
+}

@@ -28,27 +28,21 @@
             <span class="li-title">Following:</span> <%= user.following_count %>
           </li>
           <li>
-            <span class="li-title">Posts:</span> <%= user.post_count %>
+            <span class="li-title">Posts:</span>
+            <% if user.post_count > 0 %>
+              <%= link_to user.post_count, posts_path(user: user.handle) %>
+            <% else %>
+              <%= user.post_count %>
+            <% end %>
           </li>
           <li>
-            <span class="li-title">User:</span> <%= user.created_at %>
+            <span class="li-title">Created:</span> <%= user.created_at %>
+          </li>
+          <li>
+            <span class="li-title">Confirmed:</span>
           </li>
         </ul>
       </td>
     </tr>
   </table>
 </div>
-
-<% if posts.any? %>
-  <div class="pagination">
-    <% if next_page_id.present? %>
-      <%= link_to 'Next page  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>'.html_safe, user_path(user.id, page_id: next_page_id), class: 'pull-right' %>
-    <% end %>
-  </div>
-  <%= render 'shared/posts_table', posts: posts %>
-  <div class="pagination">
-    <% if next_page_id.present? %>
-      <%= link_to 'Next page  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>'.html_safe, user_path(user.id, page_id: next_page_id), class: 'pull-right' %>
-    <% end %>
-  </div>
-<% end %>

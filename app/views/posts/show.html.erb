@@ -39,7 +39,7 @@
   </div>
 
   <% if comments_next_page_id.present? %>
-    <%= link_to 'Next page >', post_path(params[:id], page_id: comments_next_page_id), class: 'pull-right' %>
+    <%= link_to 'Next page  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>'.html_safe, post_path(params[:id], page_id: comments_next_page_id), class: 'pull-right' %>
   <% end %>
   <br>
 
@@ -55,7 +55,6 @@
         <tr>
           <td><%= link_to comment.user_handle, user_path(comment.user_id) %></td>
           <td><%= comment.text %></td>
-          <td><%= comment.created_at %></td>
         </tr>
       <% end %>
     </table>

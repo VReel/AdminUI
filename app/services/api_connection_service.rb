@@ -30,16 +30,18 @@ class ApiConnectionService
     get("/v1/users/#{user_id}/posts?page=#{page_id}")
   end
 
-  def get_posts(page_id, sort: nil)
-    get("/v1/admin/posts?page=#{page_id}&sort=#{sort}")
+  def get_posts(page_id, params)
+    params.each { |_key, value| value.strip! }
+
+    get("/v1/admin/posts?page=#{page_id}&#{params.to_query}")
   end
 
   def get_post(post_id)
     get("/v1/posts/#{post_id}")
   end
 
-  def get_post_comments(post_id)
-    get("/v1/posts/#{post_id}/comments")
+  def get_post_comments(post_id, page_id)
+    get("/v1/posts/#{post_id}/comments?page=#{page_id}")
   end
 
   def get_stats(date_from, date_to)
