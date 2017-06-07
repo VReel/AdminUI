@@ -1,0 +1,8 @@
+<div class="pagination">
+  <% if page > 1 %>
+    <%= link_to '<i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Previous page'.html_safe, send(path, params.merge(page_id: page - 2)), class: 'pull-left' %>
+  <% end %>
+  <% if next_page_id.present? %>
+    <%= link_to 'Next page  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>'.html_safe, send(path, params.merge(page_id: next_page_id)), class: 'pull-right' %>
+  <% end %>
+</div>

@@ -8,7 +8,7 @@ class ApiConnectionService
   end
 
   def sign_in(email, password)
-    res = post('/v1/users/sign_in', login: email, password: password)
+    res = request(:post, '/v1/users/sign_in', { login: email, password: password }, throw_on_error: false)
 
     if res.code.to_i == 200
       session['uid'] = res['uid']
@@ -20,6 +20,28 @@ class ApiConnectionService
     @message = res.body
 
     false
+  end
+
+  def get_user(user_id)
+    get("/v1/users/#{user_id}")
+  end
+
+  def get_user_posts(user_id, page_id)
+    get("/v1/users/#{user_id}/posts?page=#{page_id}")
+  end
+
+  def get_posts(page_id, params)
+    params.each { |_key, value| value.strip! }
+
+    get("/v1/admin/posts?page=#{page_id}&#{params.to_query}")
+  end
+
+  def get_post(post_id)
+    get("/v1/posts/#{post_id}")
+  end
+
+  def get_post_comments(post_id, page_id)
+    get("/v1/posts/#{post_id}/comments?page=#{page_id}")
   end
 
   def get_stats(date_from, date_to)
@@ -60,8 +82,8 @@ class ApiConnectionService
     request(:delete, path)
   end
 
-  # rubocop:disable Metrics/AbcSize
-  def request(method, path, body = nil)
+  # rubocop:disable all
+  def request(method, path, body = nil, throw_on_error: true)
     uri = URI(File.join(session['api_server'], path))
 
     req = if method == :get
@@ -83,11 +105,16 @@ class ApiConnectionService
       http.request(req)
     end
 
+    if throw_on_error
+      raise ApiNoAuthException, 'No auth' if res.code.to_i == 401
+      raise ApiError, "#{res.uri} returned a #{res.code} error" if res.code.to_i >= 400
+    end
+
     reset_auth_token(res)
 
     res
   end
-  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable all
 
   def set_auth_headers(req)
     req['vreel-application-id'] = Rails.configuration.api_servers[session['api_server']]
