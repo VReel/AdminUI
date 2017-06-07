@@ -6,7 +6,7 @@
     <th>Posts</th>
     <th>Followers</th>
     <th>Following</th>
-    <th>User created</th>
+    <th>Date registered</th>
   </tr>
   <% users.each do |user| %>
     <tr class="post-row" data-user-id="<%= user.id %>">
@@ -17,7 +17,7 @@
         <%= user.handle %>
       </td>
       <td>
-
+        <%= user.email %>
       </td>
       <td>
         <% if user.post_count > 0 %>
