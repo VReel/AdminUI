@@ -7,6 +7,7 @@
     <th>Followers</th>
     <th>Following</th>
     <th>Date registered</th>
+    <th>Confirmed?</th>
   </tr>
   <% users.each do |user| %>
     <tr class="post-row" data-user-id="<%= user.id %>">
@@ -34,6 +35,13 @@
       </td>
       <td>
         <%= user.created_at %>
+      </td>
+      <td class="text-align-center">
+        <% if user.confirmed? %>
+          <i class="fa fa-check-circle green" aria-hidden="true"></i>
+        <% else %>
+          <i class="fa fa-times red" aria-hidden="true"></i>
+        <% end %>
       </td>
     </tr>
   <% end %>

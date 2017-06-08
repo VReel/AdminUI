@@ -103,7 +103,9 @@
   $('.filter-wrapper').each(function() {
     if ($(this).find('input[value]:not([value=""])').length) {
       $(this).find('.filter-toggle').trigger('click');
-      $('.filters-toggle').trigger('click');
+      if ($('.filters').hasClass('hidden')) {
+        $('.filters-toggle').trigger('click');
+      }
     }
   });
 </script>

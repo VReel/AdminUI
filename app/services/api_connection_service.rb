@@ -23,7 +23,7 @@ class ApiConnectionService
   end
 
   def get_user(user_id)
-    get("/v1/users/#{user_id}")
+    get("/v1/admin/users/#{user_id}")
   end
 
   def get_users(page_id, params)
@@ -48,6 +48,10 @@ class ApiConnectionService
 
   def get_post_comments(post_id, page_id)
     get("/v1/posts/#{post_id}/comments?page=#{page_id}")
+  end
+
+  def get_post_likes(post_id, page_id)
+    get("/v1/posts/#{post_id}/likes?page=#{page_id}")
   end
 
   def get_stats(date_from, date_to)

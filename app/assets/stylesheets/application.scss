@@ -15,14 +15,14 @@
  *= require bootstrap-datepicker3
  */
 
-.caption {
-  width: 80%;
-  display: inline-block;
-}
-
 .text-align-right {
   text-align: right
 }
+
+.text-align-center {
+  text-align: center
+}
+
 
 .quick-link {
   margin-left: 15px;
@@ -95,4 +95,12 @@ h1 {
   label {
     font-weight: normal;
   }
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
 }

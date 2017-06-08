@@ -14,9 +14,14 @@ class PostsController < ApplicationController
   helper_method :post_api_data
 
   def comments_api_data
-    @comments_api_data ||= connection.get_post_comments(params[:id], params[:page_id])
+    @comments_api_data ||= connection.get_post_comments(params[:id], params[:comments_page_id])
   end
   helper_method :comments_api_data
+
+  def likes_api_data
+    @likes_api_data ||= connection.get_post_likes(params[:id], params[:likes_page_id])
+  end
+  helper_method :likes_api_data
 
   def posts
     @posts ||= posts_api_data['data']
@@ -37,10 +42,20 @@ class PostsController < ApplicationController
   end
   helper_method :comments
 
+  def likes
+    @likes ||= likes_api_data['data'].map { |like_data| User.new(like_data) }
+  end
+  helper_method :likes
+
   def comments_next_page_id
     comments_api_data['meta'] && comments_api_data['meta']['next_page_id']
   end
   helper_method :comments_next_page_id
+
+  def likes_next_page_id
+    likes_api_data['meta'] && likes_api_data['meta']['next_page_id']
+  end
+  helper_method :likes_next_page_id
 
   def next_page_id
     posts_api_data['meta'] && posts_api_data['meta']['next_page_id']
