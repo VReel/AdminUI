@@ -23,7 +23,13 @@ class ApiConnectionService
   end
 
   def get_user(user_id)
-    get("/v1/users/#{user_id}")
+    get("/v1/admin/users/#{user_id}")
+  end
+
+  def get_users(page_id, params)
+    params.each { |_key, value| value.strip! }
+
+    get("/v1/admin/users?page=#{page_id}&#{params.to_query}")
   end
 
   def get_user_posts(user_id, page_id)
@@ -42,6 +48,10 @@ class ApiConnectionService
 
   def get_post_comments(post_id, page_id)
     get("/v1/posts/#{post_id}/comments?page=#{page_id}")
+  end
+
+  def get_post_likes(post_id, page_id)
+    get("/v1/posts/#{post_id}/likes?page=#{page_id}")
   end
 
   def get_stats(date_from, date_to)
