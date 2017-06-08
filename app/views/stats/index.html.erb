@@ -80,8 +80,11 @@
         <tbody>
           <% @stats['data']['attributes']['top_users'].each do |user| %>
             <tr>
-              <th scope="row"><%= user['user']['data']['attributes']['handle'] %></th>
-              <th class="numeric"><%= user['post_count'] %></th>
+              <th scope="row"><%= link_to user['user']['data']['attributes']['handle'], user_path(user['user']['data']['id']) %></th>
+              <th class="numeric">
+                <%= link_to user['post_count'],
+                            posts_path(user:  user['user']['data']['attributes']['handle'], date_from: params[:date_from], date_to: params[:date_to])
+                %></th>
             </tr>
           <% end %>
           <% if @stats['data']['attributes']['top_users'].size == 0 %>
