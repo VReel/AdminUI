@@ -44,7 +44,9 @@ class UsersController < ApplicationController
   helper_method :count
 
   def filter_params
-    params.slice(:sort, :date_from, :date_to)
+    params.slice :sort, :handle, :date_from, :date_to, :min_posts, :max_posts, :min_followers,
+                 :max_followers, :min_following, :max_following, :follows_user, :following_user
+
   end
   helper_method :filter_params
 end

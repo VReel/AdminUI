@@ -5,20 +5,84 @@
     <%= form_tag users_path, method: :get %>
       <div class="row">
         <div class="col-md-4">
-        <h4>Filters: <a class="filters-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h4>
-          <div class="filter-wrapper">
-            <h5>Date registered <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
-            <div class="filter hidden">
-              <label>From:
-                <input type="text" data-provide='datepicker' name="date_from" value="<%= params[:date_from] %>" data-date-format='dd-M-yyyy' class="form-control">
-              </label>
-              <label>To:
-                <input type="text" data-provide='datepicker' name="date_to" value="<%= params[:date_to] %>" data-date-format='dd-M-yyyy' class="form-control">
-              </label>
+          <h4>Filters: <a class="filters-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h4>
+          <div class="filters hidden">
+            <div class="filter-wrapper">
+              <h5>Handle <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>
+                  <input type="text" name="handle" value="<%= params[:handle] %>" class="form-control">
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-wrapper">
+              <h5>Date registered <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>From:
+                  <input type="text" data-provide='datepicker' name="date_from" value="<%= params[:date_from] %>" data-date-format='dd-M-yyyy' class="form-control">
+                </label>
+                <label>To:
+                  <input type="text" data-provide='datepicker' name="date_to" value="<%= params[:date_to] %>" data-date-format='dd-M-yyyy' class="form-control">
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-wrapper">
+              <h5>Posts <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>At least:
+                  <input type="number" name="min_posts" value="<%= params[:min_posts] %>" class="form-control">
+                </label>
+                <label>At most:
+                  <input type="number"  name="max_posts" value="<%= params[:max_posts] %>" class="form-control">
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-wrapper">
+              <h5>Followers <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>At least:
+                  <input type="number" name="min_followers" value="<%= params[:min_followers] %>" class="form-control">
+                </label>
+                <label>At most:
+                  <input type="number"  name="max_followers" value="<%= params[:max_followers] %>" class="form-control">
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-wrapper">
+              <h5>Following <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>At least:
+                  <input type="number" name="min_following" value="<%= params[:min_following] %>" class="form-control">
+                </label>
+                <label>At most:
+                  <input type="number"  name="max_following" value="<%= params[:max_following] %>" class="form-control">
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-wrapper">
+              <h5>Who follows <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>User:
+                  <input type="text" name="follows_user" value="<%= params[:follows_user] %>" class="form-control">
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-wrapper">
+              <h5>Is followed by <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <label>User:
+                  <input type="text" name="following_user" value="<%= params[:following_user] %>" class="form-control">
+                </label>
+              </div>
             </div>
           </div>
         </div>
-
         <div class="col-md-4">
           <h4>Order by:</h4>
           <div>

@@ -16,16 +16,26 @@
             <span class="li-title">Handle:</span> <%= user.handle %>
           </li>
           <li>
-            <span class="li-title">Email:</span>
+            <span class="li-title">Email:</span> <%= user.email %>
           </li>
           <li>
             <span class="li-title">Profile:</span> <%= user.profile %>
           </li>
           <li>
-            <span class="li-title">Followers:</span> <%= user.follower_count %>
+            <span class="li-title">Followers:</span>
+            <% if user.follower_count > 0 %>
+              <%= link_to user.follower_count, users_path(follows_user: user.handle) %>
+            <% else %>
+              <%= user.follower_count %>
+            <% end %>
           </li>
           <li>
-            <span class="li-title">Following:</span> <%= user.following_count %>
+            <span class="li-title">Following:</span>
+            <% if user.following_count > 0 %>
+              <%= link_to user.following_count, users_path(following_user: user.handle) %>
+            <% else %>
+              <%= user.following_count %>
+            <% end %>
           </li>
           <li>
             <span class="li-title">Posts:</span>

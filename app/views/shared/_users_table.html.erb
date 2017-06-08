@@ -28,10 +28,18 @@
         <% end %>
       </td>
       <td>
-        <%= user.follower_count %>
+        <% if user.follower_count > 0 %>
+          <%= link_to user.follower_count, users_path(follows_user: user.handle) %>
+        <% else %>
+          <%= user.follower_count %>
+        <% end %>
       </td>
       <td>
-        <%= user.following_count %>
+        <% if user.following_count > 0 %>
+          <%= link_to user.following_count, users_path(following_user: user.handle) %>
+        <% else %>
+          <%= user.following_count %>
+        <% end %>
       </td>
       <td>
         <%= user.created_at %>
