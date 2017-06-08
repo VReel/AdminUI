@@ -53,11 +53,11 @@
         <tbody>
             <tr>
               <th scope="row">Users</th>
-              <th class="numeric"><%= @stats['data']['attributes']['users'] %></th>
+              <th class="numeric"><%= link_to @stats['data']['attributes']['users'], users_path(date_from: params[:date_from], date_to: params[:date_to]) %></th>
             </tr>
             <tr>
               <th scope="row">Posts</th>
-              <th class="numeric"><%= @stats['data']['attributes']['posts'] %></th>
+              <th class="numeric"><%= link_to @stats['data']['attributes']['posts'], posts_path(date_from: params[:date_from], date_to: params[:date_to])  %></th>
             </tr>
         </tbody>
       </table>
@@ -83,7 +83,7 @@
               <th scope="row"><%= link_to user['user']['data']['attributes']['handle'], user_path(user['user']['data']['id']) %></th>
               <th class="numeric">
                 <%= link_to user['post_count'],
-                            posts_path(user:  user['user']['data']['attributes']['handle'], date_from: params[:date_from], date_to: params[:date_to])
+                            posts_path(user: user['user']['data']['attributes']['handle'], date_from: params[:date_from], date_to: params[:date_to])
                 %></th>
             </tr>
           <% end %>
