@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     session[:api_server] = params[:api_server]
 
     if connection.sign_in(params[:email], params[:password])
-      redirect_to '/'
+      redirect_to stats_path
     else
       flash.now[:alert] = connection.get_error_message
       render :new
