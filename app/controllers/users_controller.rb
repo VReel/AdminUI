@@ -28,10 +28,27 @@ class UsersController < ApplicationController
   def sort_options
     {
       'Created At DESC' => :created_at_desc,
-      'Created At ASC' => :created_at_asc
+      'Created At ASC' => :created_at_asc,
+      'Confirmed At DESC' => :confirmed_at_desc,
+      'Confirmed At ASC' => :confirmed_at_asc,
+      'Posts DESC' => :posts_desc,
+      'Posts ASC' => :posts_asc,
+      'Followers DESC' => :followers_desc,
+      'Followers ASC' => :followers_asc,
+      'Following DESC' => :following_desc,
+      'Following ASC' => :following_asc,
     }
   end
   helper_method :sort_options
+
+  def confirmed_options
+    {
+      'Any' => nil,
+      'Only confirmed' => true,
+      'Only unconfirmed' => false
+    }
+  end
+  helper_method :confirmed_options
 
   def page
     Integer(params[:page_id] || 0) + 1
@@ -45,7 +62,8 @@ class UsersController < ApplicationController
 
   def filter_params
     params.slice :sort, :handle, :date_from, :date_to, :min_posts, :max_posts, :min_followers,
-                 :max_followers, :min_following, :max_following, :follows_user, :following_user
+                 :max_followers, :min_following, :max_following, :follows_user, :following_user,
+                 :confirmed
 
   end
   helper_method :filter_params

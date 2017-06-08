@@ -16,6 +16,9 @@
           <ul>
             <li>
               <span class="li-title">Caption:</span><span class="caption"><%= post.caption %></span>
+              <% if post.edited  %>
+                <span class="edited"><i class="fa fa-pencil" aria-hidden="true"></i> Edited</span>
+              <% end %>
             </li>
             <li>
               <span class="li-title">Author:</span> <%= link_to post.user_handle, user_path(post.user_id) %>
@@ -58,7 +61,12 @@
           <% comments.each do |comment| %>
             <tr>
               <td><%= link_to comment.user_handle, user_path(comment.user_id) %></td>
-              <td><%= comment.text %></td>
+              <td>
+                <%= comment.text %>
+                <% if comment.edited  %>
+                  <span class="edited"><i class="fa fa-pencil" aria-hidden="true"></i> Edited</span>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </table>

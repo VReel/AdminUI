@@ -29,6 +29,13 @@
             </div>
 
             <div class="filter-wrapper">
+              <h5>Confirmed? <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
+              <div class="filter hidden">
+                <%= select_tag :confirmed, options_for_select(confirmed_options, params[:confirmed]), class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="filter-wrapper">
               <h5>Posts <a class="filter-toggle"><i class="fa fa-caret-up" aria-hidden="true"></i></a></h5>
               <div class="filter hidden">
                 <label>At least:
@@ -135,6 +142,11 @@
 
   $('.filter-wrapper').each(function() {
     if ($(this).find('input[value]:not([value=""])').length) {
+      $(this).find('.filter-toggle').trigger('click');
+      $('.filters-toggle').trigger('click');
+    }
+
+    if ($(this).find('option[selected][value]:not([value=""])').length) {
       $(this).find('.filter-toggle').trigger('click');
       $('.filters-toggle').trigger('click');
     }
