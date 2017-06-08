@@ -1,5 +1,4 @@
 class User < Base
-
   def confirmed_at
     return 'Never' unless data['attributes']['confirmed_at'].present?
 
@@ -9,5 +8,4 @@ class User < Base
   def confirmed?
     data['attributes']['confirmed_at'].present?
   end
-
 end
