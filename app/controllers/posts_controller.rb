@@ -85,7 +85,7 @@ class PostsController < ApplicationController
   helper_method :count
 
   def filter_params
-    params.slice(:sort, :date_from, :date_to, :user, :min_comments, :max_comments, :min_likes, :max_likes)
+    params.slice(:sort, :date_from, :date_to, :user, :min_comments, :max_comments, :min_likes, :max_likes, :hash_tag)
   end
   helper_method :filter_params
 end

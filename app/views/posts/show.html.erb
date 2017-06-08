@@ -32,6 +32,12 @@
             <li>
               <span class="li-title">Created:</span> <%= post.created_at %>
             </li>
+            <li>
+              <span class="li-title">Hash tags:</span>
+              <% post.hash_tags.each do |hash_tag| %>
+                <%= link_to "##{hash_tag}", posts_path(hash_tag: hash_tag) %>
+              <% end %>
+            </li>
           </ul>
         </td>
       </tr>

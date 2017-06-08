@@ -25,4 +25,45 @@ $(function() {
       $('.api-data').removeClass('hidden');
     }
   });
+
+  function expandFilters() {
+    if ($('.filters').hasClass('hidden')) {
+      $('.filters-toggle').trigger('click');
+    }
+  }
+
+  $('.filter-toggle').click(function() {
+    var $icon = $(this).find('.fa');
+    $(this).parents('.filter-wrapper').find('.filter').toggleClass('hidden')
+    if ($icon.hasClass('fa-caret-up')) {
+      $icon.removeClass('fa-caret-up').addClass('fa-caret-down');
+    }
+    else {
+      $icon.removeClass('fa-caret-down').addClass('fa-caret-up');
+    }
+  });
+
+  $('.filters-toggle').click(function() {
+    var $icon = $(this).find('.fa').first();
+    $('.filters').toggleClass('hidden')
+    if ($icon.hasClass('fa-caret-up')) {
+      $icon.removeClass('fa-caret-up').addClass('fa-caret-down');
+    }
+    else {
+      $icon.removeClass('fa-caret-down').addClass('fa-caret-up');
+    }
+  });
+
+  $('.filter-wrapper').each(function() {
+    if ($(this).find('input[value]:not([value=""])').length) {
+      $(this).find('.filter-toggle').trigger('click');
+      expandFilters();
+    }
+
+    if ($(this).find('option[selected][value]:not([value=""])').length) {
+      $(this).find('.filter-toggle').trigger('click');
+      expandFilters();
+    }
+  });
 });
+
